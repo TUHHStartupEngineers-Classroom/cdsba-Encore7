@@ -6,8 +6,10 @@ title: "Probability Theory"
 
 ### Given that 
 
-$P(S) = 0.3$ and $P(\overline{S}) = 0.7$
-$P(T/S) = 0.2$ and $P(\overline{T}/S) = 0.8$
+$P(S) = 0.3$ and $P(\overline{S}) = 0.7$ 
+
+$P(T/S) = 0.2$ and $P(\overline{T}/S) = 0.8$ 
+
 $P(T/\overline{S}) = 0.6$ and $P(\overline{T}/\overline{S}) = 0.4$
 
 ### Solution
@@ -20,16 +22,16 @@ $P(T/\overline{S}) = 0.6$ and $P(\overline{T}/\overline{S}) = 0.4$
 
 * $P(\overline{T}\cap \overline{S}) = P(\overline{S}) * P(\overline{T}/\overline{S}) = 0.7 * 0.4 = 0.28$
 
-Sum of all four probabilities = 1
+Sum of all four probabilities = 0.06 + 0.42 + 0.24 + 0.28 = 1
 
 # Assignment 2:
 
-### Let S = Smartphone, T = Tablet and C = Computer 
+#### Let S = Smartphone, T = Tablet and C = Computer 
 
 ### Solution
 
 * The percentage of customers using all three devices:
-$P(S\cap T\cap C) = 0.5\%$  
+$= P(S\cap T\cap C) = 0.5\%$  
 
 * The percentage of customers using at least two devices:
 $= 7.3 + 3.3 + 8.8 + 0.5 = 19.9\%$  
@@ -41,8 +43,10 @@ $= 42.3 + 27.8 + 10 = 80.1\%$
 
 ### Given that,
 
-A = product is faulty vs. $\overline{A}$ = product is flawless
-B = alarm is triggered vs. $\overline{B}$ = no alarm
+$A$ = product is faulty vs. $\overline{A}$ = product is flawless 
+
+$B$ = alarm is triggered vs. $\overline{B}$ = no alarm 
+
 $P(B|A)=0.97$  
 $P(B|\overline{A})=0.01$  
 $P(A)=0.04$
