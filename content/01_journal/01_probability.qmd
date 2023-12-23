@@ -2,96 +2,58 @@
 title: "Probability Theory"
 ---
 
-::: callout-note
-You can delete everything in here and start fresh.
-:::
+# Assignment 1:
 
-This is a `.qmd` file. It is plain text with special features. Any time you write just like this, it will be compiled to normal text in the website. If you put a \# in front of your text, it will create a top level-header.
+### Given that 
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+$P(S) = 0.3$ and $P(\overline{S}) = 0.7$
+$P(T/S) = 0.2$ and $P(\overline{T}/S) = 0.8$
+$P(T/\overline{S}) = 0.6$ and $P(\overline{T}/\overline{S}) = 0.4$
 
-# Text Formatting Starts
+### Solution
 
-*italics* and **bold**
+* $P(T\cap S) = P(S) * P(T/S) = 0.3 * 0.2 = 0.06$
 
-superscript^2^ / subscript~2~
+* $P(T\cap \overline{S}) = P(\overline{S}) * P(T/\overline{S}) = 0.7 * 0.6 = 0.42$
 
-~~strikethrough~~
+* $P(\overline{T}\cap S) = P(S) * P(\overline{T}/S) = 0.3 * 0.8 = 0.24$
 
-`verbatim code`
+* $P(\overline{T}\cap \overline{S}) = P(\overline{S}) * P(\overline{T}/\overline{S}) = 0.7 * 0.4 = 0.28$
 
-> Blockquote
+Sum of all four probabilities = 1
 
-# Headings
+# Assignment 2:
 
-## Header 2
-### Header 3
-#### Header 4
-##### Header 5
-###### Header 6
+### Let S = Smartphone, T = Tablet and C = Computer 
 
-# Links & Images
+### Solution
 
-<https://quarto.org>
+* The percentage of customers using all three devices:
+$P(S\cap T\cap C) = 0.5\%$  
 
-[Quarto](https://quarto.org)
+* The percentage of customers using at least two devices:
+$= 7.3 + 3.3 + 8.8 + 0.5 = 19.9\%$  
 
-![Caption](../../assets/img/elephant.png)
+* The percentage of customers using only one device: 
+$= 42.3 + 27.8 + 10 = 80.1\%$  
 
-[![Caption](../../assets/img/elephant.png)](https://quarto.org)
+# Assignment 3:
 
-[![Caption](../../assets/img/elephant.png)](https://quarto.org "An elephant")
+### Given that,
 
+A = product is faulty vs. $\overline{A}$ = product is flawless
+B = alarm is triggered vs. $\overline{B}$ = no alarm
+$P(B|A)=0.97$  
+$P(B|\overline{A})=0.01$  
+$P(A)=0.04$
 
-# Lists
+### Solution
 
-* unordered list
-    + sub-item 1
-    + sub-item 2
-        - sub-sub-item 1
-        
-*   item 2
+By Bayesian Theorem,
+$P(A|B) = \frac{P(A|B)*P(A)}{P(B)} = \frac{P(A|B)*P(A)}{P(B|A)*P(A)+P(B|\overline{A})*P(\overline{A})}$
 
-    Continued (indent 4 spaces)
-    
-    
-1. ordered list
-2. item 2
-    i) sub-item 1
-         A.  sub-sub-item 1
-         
-(@)  A list whose numbering
+* $P(\overline{A}|B)=\frac{0.01*0.96}{(0.01*0.96)+(0.97*0.04)}= 0.1983471074 =19.83\%$  
 
-continues after
+* $P(A|B)=\frac{0.97*0.04}{(0.01*0.96)+(0.97*0.04)}= 0.8016528926 =80.17\%$  
 
-(@)  an interruption
-
-# Tables
-
-| Right | Left | Default | Center |
-|------:|:-----|---------|:------:|
-|   12  |  12  |    12   |    12  |
-|  123  |  123 |   123   |   123  |
-|    1  |    1 |     1   |     1  |
-
-# Source Code
-
-Use ``` to delimit blocks of source code:
-
-```
-code
-```
-
-Add a language to syntax highlight code blocks:
-
-```{r}
-1 + 1
-```
-
-```{r}
-cars
-```
-
-```{r}
-plot(cars)
-```
+These results show that in case the alarm is triggered, there is a possibility of about `19.83%` that the product is flawless and a probability of `80.17%` that the product is faulty.
