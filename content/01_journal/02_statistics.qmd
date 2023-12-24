@@ -8,7 +8,9 @@ Loading and Overview of the Table:
 
 ```{r}
 # Loading file random_vars:
-random_vars <- readRDS("/Users/amankumar/Documents/MS/Sem1/Business Management/Causal Data Science/Causal_Data_Science_Data/random_vars.rds")
+random_vars <- readRDS("../../Causal_Data_Science_Data/random_vars.rds")
+View(random_vars)
+random_vars
 ``` 
 
 ### Task 1: 
@@ -68,8 +70,6 @@ The correlation coefficient of `0.55` between income and age suggests a moderate
 
 ### Task 4: 
 
-What measure is easier to interpret? Please discuss your interpretation.  
-  
 Both correlation and covariance are measures of the relationship between two variables, but they differ in scale and interpretability.
 
 * Covariance:
