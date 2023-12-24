@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Oliver Mork">
+<meta name="author" content="Aman Kumar">
 
 <title>MyLabJournal - Statistical Concepts</title>
 <style>
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -64,6 +98,11 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -148,7 +187,13 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#assignment" id="toc-assignment" class="nav-link active" data-scroll-target="#assignment">Assignment</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -165,7 +210,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Oliver Mork </p>
+             <p>Aman Kumar </p>
           </div>
   </div>
     
@@ -176,21 +221,174 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="assignment" class="level1">
+<h1>Assignment</h1>
+<p>Loading and Overview of the Table:</p>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-1_73647a2cd0bfb1920b4d5beec600bea9">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Loading file random_vars:</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>random_vars <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"/Users/amankumar/Documents/MS/Sem1/Business Management/Causal Data Science/Causal_Data_Science_Data/random_vars.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="task-1" class="level3">
+<h3 class="anchored" data-anchor-id="task-1">Task 1:</h3>
+<p>For each variable: age and income, computing the following values:</p>
+<ul>
+<li>Expected Value</li>
+</ul>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-2_b6cb4401870fb974b947c4d268b4fd18">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Expected Values:</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>expected_value <span class="ot">&lt;-</span> <span class="fu">sapply</span>(random_vars, mean)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co"># Displaying the Expected Values</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>expected_values_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"Expected Value of Age"</span> <span class="ot">=</span> expected_value[<span class="st">"age"</span>], <span class="st">"Expected value of Income"</span> <span class="ot">=</span> expected_value[<span class="st">"income"</span>], <span class="at">row.names =</span> <span class="st">''</span>)</span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="fu">colnames</span>(expected_values_df) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">" "</span>, <span class="fu">colnames</span>(expected_values_df))</span>
+<span id="cb2-6"><a href="#cb2-6"></a>expected_values_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Expected Value of Age"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Expected value of Income"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"33.471","2":"3510.731","_rn_":""}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<ul>
+<li>Variance</li>
+</ul>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-3_15c1448705ed785abc45cbdf4d5f5ca1">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Variance</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>variance <span class="ot">&lt;-</span> <span class="fu">sapply</span>(random_vars, var)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># Displaying the Variances</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>variances_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"Variance of Age"</span> <span class="ot">=</span> variance[<span class="st">"age"</span>], <span class="st">"Variance of Income"</span> <span class="ot">=</span> variance[<span class="st">"income"</span>], <span class="at">row.names =</span> <span class="st">''</span>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="fu">colnames</span>(variances_df) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">" "</span>, <span class="fu">colnames</span>(variances_df))</span>
+<span id="cb3-6"><a href="#cb3-6"></a>variances_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Variance of Age"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Variance of Income"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"340.6078","2":"8625646","_rn_":""}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<ul>
+<li>Standard Deviation</li>
+</ul>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-4_611a7e0649e517839118c179146991bb">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Standard Deviation</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>std <span class="ot">&lt;-</span> <span class="fu">sapply</span>(random_vars, sd)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>std_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"Standard Deviation of Age"</span> <span class="ot">=</span> std[<span class="st">"age"</span>], <span class="st">"Standard Deviation of Income"</span> <span class="ot">=</span> std[<span class="st">"income"</span>], <span class="at">row.names =</span> <span class="st">''</span>)</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">colnames</span>(std_df) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">" "</span>, <span class="fu">colnames</span>(std_df))</span>
+<span id="cb4-5"><a href="#cb4-5"></a>std_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Standard Deviation of Age"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Standard Deviation of Income"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"18.45556","2":"2936.945","_rn_":""}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="task-2" class="level3">
+<h3 class="anchored" data-anchor-id="task-2">Task 2:</h3>
+<p>No, it doesn’t makes sense to compare the standard deviations as comparing the standard deviations of age and income directly may not provide meaningful insights, as they are measured in different units.These two measures reflect the variability within each respective variable, but they do not offer a direct comparison between the two variables.</p>
+</section>
+<section id="task-3" class="level3">
+<h3 class="anchored" data-anchor-id="task-3">Task 3:</h3>
+<p>The relationship between both variables with covariance and correlation:</p>
+<ul>
+<li>Covariance</li>
+</ul>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-5_9e22247a0967a6b5524460b41a3902ca">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>covariance <span class="ot">&lt;-</span> <span class="fu">cov</span>(random_vars<span class="sc">$</span>income, random_vars<span class="sc">$</span>age)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">paste</span>(<span class="st">"Covariance is"</span>,covariance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "Covariance is 29700.1468458458"</code></pre>
+</div>
+</div>
+<p>The covariance of <code>29700.15</code> between income and age suggests a positive relationship, indicating that as age increases, there tends to be an increase in income, and vice versa.</p>
+<ul>
+<li>Correlation</li>
+</ul>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-6_16f6f8730d7c751f2b85c6b36afdafdd">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(random_vars<span class="sc">$</span>income, random_vars<span class="sc">$</span>age)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">paste</span>(<span class="st">"Correlation is"</span>, correlation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "Correlation is 0.547943162326476"</code></pre>
+</div>
+</div>
+<p>The correlation coefficient of <code>0.55</code> between income and age suggests a moderate positive linear relationship, indicating that, on average, as age increases, there is a tendency for income to also increase.</p>
+</section>
+<section id="task-4" class="level3">
+<h3 class="anchored" data-anchor-id="task-4">Task 4:</h3>
+<p>What measure is easier to interpret? Please discuss your interpretation.</p>
+<p>Both correlation and covariance are measures of the relationship between two variables, but they differ in scale and interpretability.</p>
+<ul>
+<li><p>Covariance:</p>
+<ul>
+<li><em>Interpretation:</em> Covariance measures the extent to which two variables change together. It can be positive, negative, or zero.</li>
+<li><em>Scale:</em> The scale of covariance is in the units of the product of the units of the two variables.</li>
+<li><em>Interpretation Challenge:</em> The challenge with interpreting covariance lies in its scale. The magnitude of the covariance is not standardized, making it difficult to compare the strength of relationships between different pairs of variables.</li>
+</ul></li>
+<li><p>Correlation:</p>
+<ul>
+<li><em>Interpretation:</em> Correlation, on the other hand, standardizes the measure of association, providing a unit less value between -1 and 1. A correlation of 1 indicates a perfect positive linear relationship, -1 indicates a perfect negative linear relationship, and 0 indicates no linear relationship.</li>
+<li><em>Scale:</em> The scale of correlation is standardized, making it easier to compare and interpret across different variable pairs.</li>
+<li><em>Interpretation Advantage:</em> Correlation is more interpretable than covariance due to its standardized scale. You can readily compare the strength and direction of relationships between different pairs of variables.</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Conclusion">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Conclusion
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You can delete everything in here and start fresh.</p>
+<p>In most cases, correlation is easier to interpret and compare than covariance because it provides a standardized measure that ranges from -1 to 1. This allows for a more straightforward understanding of the strength and direction of the relationship between two variables. If the goal is to assess the degree and direction of association while avoiding scale-related challenges, correlation is generally preferred over covariance.</p>
+</div>
+</div>
+<ol start="5" type="1">
+<li>The conditional expected values:</li>
+</ol>
+<ul>
+<li><span class="math inline">\(E[income|age&lt;=18]\)</span>:</li>
+</ul>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-7_cf37377645b16970083beb9ea10aeb55">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">#The expected value of the income when age&lt;=18:</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>cev_income_age_leq_18<span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">subset</span>(random_vars, age <span class="sc">&lt;=</span> <span class="dv">18</span>)<span class="sc">$</span>income)</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="fu">paste</span>(<span class="st">"Conditional expected value of income for age &lt;= 18:"</span>, cev_income_age_leq_18)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "Conditional expected value of income for age &lt;= 18: 389.607438016529"</code></pre>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(E[income|age\in[18,65)]\)</span></li>
+</ul>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-8_6aa068d902985cde63eb3ed7dde44f8d">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">#The expected value of the income when 18&lt;=age&lt;65:</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>cev_income_age_bw_18_65<span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">subset</span>(random_vars, age <span class="sc">%in%</span> <span class="dv">18</span><span class="sc">:</span><span class="dv">65</span>)<span class="sc">$</span>income)</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="fu">paste</span>(<span class="st">"Conditional expected value of income for age between 18 to 65:"</span>, cev_income_age_bw_18_65)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "Conditional expected value of income for age between 18 to 65: 4691.3779637378"</code></pre>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(E[income|age&gt;=65]\)</span></li>
+</ul>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-9_b7ddea5b18072be4379b17f487f8bc13">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#The expected value of the income when age&gt;=65:</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>cev_income_age_geq_65<span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">subset</span>(random_vars, age <span class="sc">&gt;=</span> <span class="dv">65</span>)<span class="sc">$</span>income) </span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">paste</span>(<span class="st">"Conditional expected value of income for age &gt;= 65:"</span>, cev_income_age_geq_65)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "Conditional expected value of income for age &gt;= 65: 1777.23728813559"</code></pre>
 </div>
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

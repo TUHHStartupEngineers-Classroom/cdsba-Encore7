@@ -2,6 +2,112 @@
 title: "Statistical Concepts"
 ---
 
-::: callout-note
-You can delete everything in here and start fresh.
+# Assignment 
+
+Loading and Overview of the Table:
+
+```{r}
+# Loading file random_vars:
+random_vars <- readRDS("/Users/amankumar/Documents/MS/Sem1/Business Management/Causal Data Science/Causal_Data_Science_Data/random_vars.rds")
+``` 
+
+### Task 1: 
+
+For each variable: age and income, computing the following values:
+
+* Expected Value
+```{r}
+# Expected Values:
+expected_value <- sapply(random_vars, mean)
+# Displaying the Expected Values
+expected_values_df <- data.frame("Expected Value of Age" = expected_value["age"], "Expected value of Income" = expected_value["income"], row.names = '')
+colnames(expected_values_df) <- gsub("\\.", " ", colnames(expected_values_df))
+expected_values_df
+```
+
+* Variance
+```{r}
+# Variance
+variance <- sapply(random_vars, var)
+# Displaying the Variances
+variances_df <- data.frame("Variance of Age" = variance["age"], "Variance of Income" = variance["income"], row.names = '')
+colnames(variances_df) <- gsub("\\.", " ", colnames(variances_df))
+variances_df
+```
+
+* Standard Deviation 
+```{r}
+# Standard Deviation
+std <- sapply(random_vars, sd)
+std_df <- data.frame("Standard Deviation of Age" = std["age"], "Standard Deviation of Income" = std["income"], row.names = '')
+colnames(std_df) <- gsub("\\.", " ", colnames(std_df))
+std_df
+```  
+
+### Task 2:
+
+No, it doesn't makes sense to compare the standard deviations as comparing the standard deviations of age and income directly may not provide meaningful insights, as they are measured in different units.These two measures reflect the variability within each respective variable, but they do not offer a direct comparison between the two variables.
+
+### Task 3: 
+
+The relationship between both variables with covariance and correlation:
+
+* Covariance
+```{r}
+covariance <- cov(random_vars$income, random_vars$age)
+paste("Covariance is",covariance)
+```  
+The covariance of `29700.15` between income and age suggests a positive relationship, indicating that as age increases, there tends to be an increase in income, and vice versa.
+
+* Correlation
+```{r}
+correlation <- cor(random_vars$income, random_vars$age)
+paste("Correlation is", correlation)
+```
+The correlation coefficient of `0.55` between income and age suggests a moderate positive linear relationship, indicating that, on average, as age increases, there is a tendency for income to also increase.
+
+### Task 4: 
+
+What measure is easier to interpret? Please discuss your interpretation.  
+  
+Both correlation and covariance are measures of the relationship between two variables, but they differ in scale and interpretability.
+
+* Covariance:
+
+  + *Interpretation:* Covariance measures the extent to which two variables change together. It can be positive, negative, or zero.
+  + *Scale:* The scale of covariance is in the units of the product of the units of the two variables.
+  + *Interpretation Challenge:* The challenge with interpreting covariance lies in its scale. The magnitude of the covariance is not standardized, making it difficult to compare the strength of relationships between different pairs of variables.
+
+* Correlation:
+
+  + *Interpretation:* Correlation, on the other hand, standardizes the measure of association, providing a unit less value between -1 and 1. A correlation of 1 indicates a perfect positive linear relationship, -1 indicates a perfect negative linear relationship, and 0 indicates no linear relationship.
+  + *Scale:* The scale of correlation is standardized, making it easier to compare and interpret across different variable pairs.
+  + *Interpretation Advantage:* Correlation is more interpretable than covariance due to its standardized scale. You can readily compare the strength and direction of relationships between different pairs of variables.
+
+:::{.callout-tip title="Conclusion"}
+In most cases, correlation is easier to interpret and compare than covariance because it provides a standardized measure that ranges from -1 to 1. This allows for a more straightforward understanding of the strength and direction of the relationship between two variables. If the goal is to assess the degree and direction of association while avoiding scale-related challenges, correlation is generally preferred over covariance. 
 :::
+  
+5. The conditional expected values:
+* $E[income|age<=18]$:  
+
+```{r}
+#The expected value of the income when age<=18:
+cev_income_age_leq_18<- mean(subset(random_vars, age <= 18)$income)
+paste("Conditional expected value of income for age <= 18:", cev_income_age_leq_18)
+```  
+* $E[income|age\in[18,65)]$  
+
+```{r}
+#The expected value of the income when 18<=age<65:
+cev_income_age_bw_18_65<- mean(subset(random_vars, age %in% 18:65)$income)
+paste("Conditional expected value of income for age between 18 to 65:", cev_income_age_bw_18_65)
+```  
+* $E[income|age>=65]$  
+
+```{r}
+#The expected value of the income when age>=65:
+cev_income_age_geq_65<- mean(subset(random_vars, age >= 65)$income) 
+paste("Conditional expected value of income for age >= 65:", cev_income_age_geq_65)
+
+```  
