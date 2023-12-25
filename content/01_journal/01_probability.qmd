@@ -4,7 +4,9 @@ title: "Probability Theory"
 
 # Assignment 1:
 
-### Given that 
+------------------------------------------------
+
+#### *Given that,* 
 
 $P(S) = 0.3$ and $P(\overline{S}) = 0.7$ 
 
@@ -12,7 +14,7 @@ $P(T/S) = 0.2$ and $P(\overline{T}/S) = 0.8$
 
 $P(T/\overline{S}) = 0.6$ and $P(\overline{T}/\overline{S}) = 0.4$
 
-### Solution
+#### *Solution*
 
 * $P(T\cap S) = P(S) * P(T/S) = 0.3 * 0.2 = 0.06$
 
@@ -26,9 +28,11 @@ Sum of all four probabilities = 0.06 + 0.42 + 0.24 + 0.28 = 1
 
 # Assignment 2:
 
-#### Let S = Smartphone, T = Tablet and C = Computer 
+------------------------------------------------
 
-### Solution
+> Let S = Smartphone, T = Tablet and C = Computer 
+
+#### *Solution*
 
 * The percentage of customers using all three devices:
 $= P(S\cap T\cap C) = 0.5\%$  
@@ -41,7 +45,9 @@ $= 42.3 + 27.8 + 10 = 80.1\%$
 
 # Assignment 3:
 
-### Given that,
+------------------------------------------------
+
+#### *Given that,*
 
 $A$ = product is faulty vs. $\overline{A}$ = product is flawless 
 
@@ -51,9 +57,9 @@ $P(B|A)=0.97$
 $P(B|\overline{A})=0.01$  
 $P(A)=0.04$
 
-### Solution
+#### *Solution*
 
-By Bayesian Theorem,
+*By Bayesian Theorem,*
 $P(A|B) = \frac{P(A|B)*P(A)}{P(B)} = \frac{P(A|B)*P(A)}{P(B|A)*P(A)+P(B|\overline{A})*P(\overline{A})}$
 
 * $P(\overline{A}|B)=\frac{0.01*0.96}{(0.01*0.96)+(0.97*0.04)}= 0.1983471074 =19.83\%$  

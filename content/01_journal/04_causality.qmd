@@ -2,6 +2,69 @@
 title: "Causality"
 ---
 
+# Assignment
+
+------------------------------------------------------------------------
+
+### Example of number of facebook friends with average grade in university course
+
+```{r}
+#| warning: false
+#| include: false
+library(ggplot2)
+library(dplyr)
+```
+
+> Generating data
+
+```{r}
+# Generating few data points
+students <- seq(1, 100, by = 1)
+
+facebook_friends <- rnorm(length(students), mean = 300, sd = 100) + 
+  rnorm(length(students), mean = 0, sd = 30)  # noise
+
+average_grade <- rnorm(length(students), mean = 70, sd = 10) + 
+  0.5 * facebook_friends + 
+  rnorm(length(students), mean = 0, sd = 10)  # noise
+
+# Creating a data frame
+data <- data.frame(Student_ID = students, 
+                   Facebook_Friends = facebook_friends,
+                   Average_Grade = average_grade)
+head(data)
+```
+
+>ggplot()
+
+```{r}
+# Scatter Plot
+ggplot(data, aes(x = Facebook_Friends, y = Average_Grade)) +
+  geom_point() +
+  labs(title = "Spurious Correlation: Facebook Friends vs. Average Grade",
+       x = "Number of Facebook Friends",
+       y = "Average Grade in University Courses")
+```
+> Correlation
+
+```{r}
+# Calculate the correlation coefficient
+correlation_coefficient <- cor(data$Facebook_Friends, data$Average_Grade)
+paste("Correlation coefficient: ", correlation_coefficient)
+```
+
 ::: callout-note
-You can delete everything in here and start fresh.
+Line Chart that shows a positive correlation between Facebook Friends and Average Grade. The correlation coefficient is `>0.9`, which indicates a strong positive correlation.
 :::
+
+Correlation doesn't imply causation. In my generated example, I deliberately created a scenario to illustrate the concept of spurious correlation without asserting any causal link between the number of Facebook friends and academic performance.
+
+In reality, there could be numerous factors influencing academic performance, and the number of Facebook friends is unlikely to be a direct cause. Some real-world factors that may contribute to good grades include:
+
+* *Study Habits:* Students who develop effective study habits are likely to perform better academically.
+
+* *Attendance:* Regular attendance in classes and engagement with course materials can positively impact grades.
+
+* *Interest in the Subject:* Genuine interest in the subject matter often leads to better understanding and performance.
+
+* *Time Management:* Efficient time management is crucial for balancing academic and extracurricular activities.

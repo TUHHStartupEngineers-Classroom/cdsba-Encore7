@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Oliver Mork">
+<meta name="author" content="Aman Kumar">
 
 <title>MyLabJournal - Causality</title>
 <style>
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -43,6 +77,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,6 +100,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+
+<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
 </head>
@@ -148,7 +188,13 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#assignment" id="toc-assignment" class="nav-link active" data-scroll-target="#assignment">Assignment</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -165,7 +211,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Oliver Mork </p>
+             <p>Aman Kumar </p>
           </div>
   </div>
     
@@ -176,6 +222,68 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="assignment" class="level1">
+<h1>Assignment</h1>
+<hr>
+<section id="example-of-number-of-facebook-friends-with-average-grade-in-university-course" class="level3">
+<h3 class="anchored" data-anchor-id="example-of-number-of-facebook-friends-with-average-grade-in-university-course">Example of number of facebook friends with average grade in university course</h3>
+<blockquote class="blockquote">
+<p>Generating data</p>
+</blockquote>
+<div class="cell" data-hash="04_causality_cache/html/unnamed-chunk-2_7937d689abd9cd87a0ebd6ffeac4641b">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Generating few data points</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>students <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>facebook_friends <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(students), <span class="at">mean =</span> <span class="dv">300</span>, <span class="at">sd =</span> <span class="dv">100</span>) <span class="sc">+</span> </span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="fu">rnorm</span>(<span class="fu">length</span>(students), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">30</span>)  <span class="co"># noise</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>average_grade <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(students), <span class="at">mean =</span> <span class="dv">70</span>, <span class="at">sd =</span> <span class="dv">10</span>) <span class="sc">+</span> </span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="fl">0.5</span> <span class="sc">*</span> facebook_friends <span class="sc">+</span> </span>
+<span id="cb1-9"><a href="#cb1-9"></a>  <span class="fu">rnorm</span>(<span class="fu">length</span>(students), <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">10</span>)  <span class="co"># noise</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># Creating a data frame</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Student_ID =</span> students, </span>
+<span id="cb1-13"><a href="#cb1-13"></a>                   <span class="at">Facebook_Friends =</span> facebook_friends,</span>
+<span id="cb1-14"><a href="#cb1-14"></a>                   <span class="at">Average_Grade =</span> average_grade)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Student_ID"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Facebook_Friends"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Average_Grade"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"480.28369","3":"326.0118"},{"1":"2","2":"344.76080","3":"259.6169"},{"1":"3","2":"476.37274","3":"307.3934"},{"1":"4","2":"351.83482","3":"236.6542"},{"1":"5","2":"322.59739","3":"237.3482"},{"1":"6","2":"488.56018","3":"329.3425"},{"1":"7","2":"288.57901","3":"194.9375"},{"1":"8","2":"413.96341","3":"278.4520"},{"1":"9","2":"497.53173","3":"292.7061"},{"1":"10","2":"358.20329","3":"255.2430"},{"1":"11","2":"347.99148","3":"250.5865"},{"1":"12","2":"256.07368","3":"182.6289"},{"1":"13","2":"358.30532","3":"240.7368"},{"1":"14","2":"391.51178","3":"271.5240"},{"1":"15","2":"349.38012","3":"240.1031"},{"1":"16","2":"366.34773","3":"268.6097"},{"1":"17","2":"332.95305","3":"244.1708"},{"1":"18","2":"260.52904","3":"204.0860"},{"1":"19","2":"170.25749","3":"168.1473"},{"1":"20","2":"400.30609","3":"289.7073"},{"1":"21","2":"181.25106","3":"118.0614"},{"1":"22","2":"424.53481","3":"289.6598"},{"1":"23","2":"336.93754","3":"233.7881"},{"1":"24","2":"286.72255","3":"214.9736"},{"1":"25","2":"280.81713","3":"205.6482"},{"1":"26","2":"193.03941","3":"168.0670"},{"1":"27","2":"222.57914","3":"186.0406"},{"1":"28","2":"323.06991","3":"235.9245"},{"1":"29","2":"444.88249","3":"320.5753"},{"1":"30","2":"339.91223","3":"240.5442"},{"1":"31","2":"694.89228","3":"386.8196"},{"1":"32","2":"190.06125","3":"182.3157"},{"1":"33","2":"367.72076","3":"249.1028"},{"1":"34","2":"254.62705","3":"188.9368"},{"1":"35","2":"248.61119","3":"196.3920"},{"1":"36","2":"141.45162","3":"165.6638"},{"1":"37","2":"279.72519","3":"217.2919"},{"1":"38","2":"364.73778","3":"259.5701"},{"1":"39","2":"434.21594","3":"280.8289"},{"1":"40","2":"276.65685","3":"187.4085"},{"1":"41","2":"323.85984","3":"238.6830"},{"1":"42","2":"222.43562","3":"191.0859"},{"1":"43","2":"368.12637","3":"254.2898"},{"1":"44","2":"302.61312","3":"245.1587"},{"1":"45","2":"267.13675","3":"217.0740"},{"1":"46","2":"274.94614","3":"206.7502"},{"1":"47","2":"326.97112","3":"266.7041"},{"1":"48","2":"181.44120","3":"178.6621"},{"1":"49","2":"333.17802","3":"247.5937"},{"1":"50","2":"219.66315","3":"168.8991"},{"1":"51","2":"375.53603","3":"254.0236"},{"1":"52","2":"397.91224","3":"269.6692"},{"1":"53","2":"121.62498","3":"126.3689"},{"1":"54","2":"407.74255","3":"286.4808"},{"1":"55","2":"408.10517","3":"281.3687"},{"1":"56","2":"288.28792","3":"212.4284"},{"1":"57","2":"184.77539","3":"125.9635"},{"1":"58","2":"475.65606","3":"302.6633"},{"1":"59","2":"420.74399","3":"267.5994"},{"1":"60","2":"372.38995","3":"277.8777"},{"1":"61","2":"396.37509","3":"246.4545"},{"1":"62","2":"155.81580","3":"157.2526"},{"1":"63","2":"285.13646","3":"217.4744"},{"1":"64","2":"228.91682","3":"144.7226"},{"1":"65","2":"139.30103","3":"131.1909"},{"1":"66","2":"167.60520","3":"163.9138"},{"1":"67","2":"252.96370","3":"205.9652"},{"1":"68","2":"70.22449","3":"113.8846"},{"1":"69","2":"387.45257","3":"267.7220"},{"1":"70","2":"215.98208","3":"202.4677"},{"1":"71","2":"293.67177","3":"190.5419"},{"1":"72","2":"440.36703","3":"295.9824"},{"1":"73","2":"321.86964","3":"240.2749"},{"1":"74","2":"324.86348","3":"226.2669"},{"1":"75","2":"422.28498","3":"274.6867"},{"1":"76","2":"283.75057","3":"198.4156"},{"1":"77","2":"501.92674","3":"345.1895"},{"1":"78","2":"431.48300","3":"273.1885"},{"1":"79","2":"307.85830","3":"189.3762"},{"1":"80","2":"396.96702","3":"287.0048"},{"1":"81","2":"318.34477","3":"236.2908"},{"1":"82","2":"323.93133","3":"230.2888"},{"1":"83","2":"389.83547","3":"266.8542"},{"1":"84","2":"260.29250","3":"204.7680"},{"1":"85","2":"200.84895","3":"179.6047"},{"1":"86","2":"209.73387","3":"167.0049"},{"1":"87","2":"205.14107","3":"196.9232"},{"1":"88","2":"401.25378","3":"278.6947"},{"1":"89","2":"452.22659","3":"303.5931"},{"1":"90","2":"480.41208","3":"330.9649"},{"1":"91","2":"296.04280","3":"234.0815"},{"1":"92","2":"546.78038","3":"372.6967"},{"1":"93","2":"217.61099","3":"170.7482"},{"1":"94","2":"350.44207","3":"245.5408"},{"1":"95","2":"409.28855","3":"278.4512"},{"1":"96","2":"320.90578","3":"203.3040"},{"1":"97","2":"150.26978","3":"140.4388"},{"1":"98","2":"411.58800","3":"270.9212"},{"1":"99","2":"209.33210","3":"160.2392"},{"1":"100","2":"246.19233","3":"171.6902"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>ggplot()</p>
+</blockquote>
+<div class="cell" data-hash="04_causality_cache/html/unnamed-chunk-3_10037c76b3dbb70fcaf4c9035be4c1f6">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Scatter Plot</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> Facebook_Friends, <span class="at">y =</span> Average_Grade)) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Spurious Correlation: Facebook Friends vs. Average Grade"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>       <span class="at">x =</span> <span class="st">"Number of Facebook Friends"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>       <span class="at">y =</span> <span class="st">"Average Grade in University Courses"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="04_causality_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="04_causality_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Correlation</p>
+</blockquote>
+<div class="cell" data-hash="04_causality_cache/html/unnamed-chunk-4_2bdcfbf5156ec5c7f06dab356b81b9ca">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Calculate the correlation coefficient</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>correlation_coefficient <span class="ot">&lt;-</span> <span class="fu">cor</span>(data<span class="sc">$</span>Facebook_Friends, data<span class="sc">$</span>Average_Grade)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">paste</span>(<span class="st">"Correlation coefficient: "</span>, correlation_coefficient)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#&gt; [1] "Correlation coefficient:  0.971816354322658"</code></pre>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -186,11 +294,21 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You can delete everything in here and start fresh.</p>
+<p>Line Chart that shows a positive correlation between Facebook Friends and Average Grade. The correlation coefficient is <code>&gt;0.9</code>, which indicates a strong positive correlation.</p>
 </div>
 </div>
+<p>Correlation doesn’t imply causation. In my generated example, I deliberately created a scenario to illustrate the concept of spurious correlation without asserting any causal link between the number of Facebook friends and academic performance.</p>
+<p>In reality, there could be numerous factors influencing academic performance, and the number of Facebook friends is unlikely to be a direct cause. Some real-world factors that may contribute to good grades include:</p>
+<ul>
+<li><p><em>Study Habits:</em> Students who develop effective study habits are likely to perform better academically.</p></li>
+<li><p><em>Attendance:</em> Regular attendance in classes and engagement with course materials can positively impact grades.</p></li>
+<li><p><em>Interest in the Subject:</em> Genuine interest in the subject matter often leads to better understanding and performance.</p></li>
+<li><p><em>Time Management:</em> Efficient time management is crucial for balancing academic and extracurricular activities.</p></li>
+</ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -542,6 +660,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom","loop":true});</script>
 
 
 

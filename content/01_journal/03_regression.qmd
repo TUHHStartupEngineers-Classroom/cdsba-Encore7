@@ -2,6 +2,108 @@
 title: "Regression and Statistical Inference"
 ---
 
-::: callout-note
-You can delete everything in here and start fresh.
-:::
+# Assignment
+
+------------------------------------------------
+
+### Task 1:
+
+Reading the data for its dimensions,
+
+```{r}
+# Loading the file car_prices
+df_car_prices <- readRDS("../../Causal_Data_Science_Data/car_prices.rds")
+# Dimensions of the data
+dim(df_car_prices)
+```
+The data has `181 rows` and `22 columns`.
+
+### Task 2:
+
+> Detailed look of the data
+
+```{r}
+#| warning: false
+t(summary(df_car_prices))
+```
+
+>Correlation of numerical columns
+
+```{r}
+# Selecting only numeric columns
+numeric_cols <- df_car_prices[sapply(df_car_prices, is.numeric)]
+
+# Calculating correlation matrix
+cor(numeric_cols)
+```
+
+> Data types of each column and the samples 
+
+```{r}
+# Data Types
+str(df_car_prices)
+```
+Total unique data types in the car_price data set
+```{r}
+# Seeing the datatypes in the data
+column_types <- sapply(df_car_prices, class)
+# Get unique data types
+unique_types <- unique(column_types)
+# Print the unique data types
+print(unique_types)
+```
+
+There are 2 types of data types in the : character and numeric.
+
+The `numeric` data type include both *integers and decimals* whereas `character` data types represent *text or strings*.
+
+### Task 3:
+
+```{r}
+lm_model <- lm(price ~ ., data = df_car_prices)
+summary(lm_model)
+```
+
+The significance of the parameters impacting the car price is denoted by the number of asterisks (*). The statistical significance for the mentioned columns is exceptionally low, indicating a high level of significance.
+
+* *enginetypeohc*
+
+* *enginetypeohcv*
+
+* *cylindernumberfive*
+
+* *cylindernumberfour*
+
+* *enginesize*
+
+* *stroke*
+
+* *peakrpm*
+
+### Task 4:
+
+Choice of the Regressor: `enginesize`
+
+* *Data type*: As observed in the linear regression summary, the `enginesize` variable is of `numeric` data type, accommodating both integer and decimal values. In this data set, it is notable for having integer values such as 130 152 109, etc.
+
+* *Effect on Price:* The coefficient of the `enginesiz` is 125.934. This value indicates that for each unit increase in size, the price is expected to increase by 125.934 units, keeping other variable constants.
+
+* *Statistical Significance*: The p-value for `enginesize`, which stands at `5 × 10^-6^`, is notably small. This suggests a high level of significance, indicating a substantial effect on the Price.
+
+
+### Task 5:
+
+```{r}
+#| warning: false
+library(dplyr)
+df_car_prices_upd <- mutate(df_car_prices, seat_heating = TRUE)
+lm_model_sh <- lm(price ~ . + seat_heating, data = df_car_prices_upd)
+```
+
+> Summary of the new model to see the coefficient of 'seat_heating'
+
+```{r}
+#| warning: false
+summary(lm_model_sh)
+```
+From the table, it's evident that the variable seat_heating exhibits no significant impact on the price. The regression model fails to establish any correlation between the price and seat_heating, resulting in a coefficient marked as NA (Not Available). This absence of correlation may be attributed to the phenomenon known as `Multi-Collinearity`. In this case, the seat_heating variable is consistently set to `True` without any variation, rendering the model incapable of estimating a coefficient for it.

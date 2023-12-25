@@ -4,13 +4,14 @@ title: "Statistical Concepts"
 
 # Assignment 
 
+------------------------------------------------
+
 Loading and Overview of the Table:
 
 ```{r}
 # Loading file random_vars:
-random_vars <- readRDS("../../Causal_Data_Science_Data/random_vars.rds")
-View(random_vars)
-random_vars
+df_random_vars <- readRDS("../../Causal_Data_Science_Data/random_vars.rds")
+df_random_vars
 ``` 
 
 ### Task 1: 
@@ -20,7 +21,7 @@ For each variable: age and income, computing the following values:
 * Expected Value
 ```{r}
 # Expected Values:
-expected_value <- sapply(random_vars, mean)
+expected_value <- sapply(df_random_vars, mean)
 # Displaying the Expected Values
 expected_values_df <- data.frame("Expected Value of Age" = expected_value["age"], "Expected value of Income" = expected_value["income"], row.names = '')
 colnames(expected_values_df) <- gsub("\\.", " ", colnames(expected_values_df))
@@ -30,7 +31,7 @@ expected_values_df
 * Variance
 ```{r}
 # Variance
-variance <- sapply(random_vars, var)
+variance <- sapply(df_random_vars, var)
 # Displaying the Variances
 variances_df <- data.frame("Variance of Age" = variance["age"], "Variance of Income" = variance["income"], row.names = '')
 colnames(variances_df) <- gsub("\\.", " ", colnames(variances_df))
@@ -40,7 +41,7 @@ variances_df
 * Standard Deviation 
 ```{r}
 # Standard Deviation
-std <- sapply(random_vars, sd)
+std <- sapply(df_random_vars, sd)
 std_df <- data.frame("Standard Deviation of Age" = std["age"], "Standard Deviation of Income" = std["income"], row.names = '')
 colnames(std_df) <- gsub("\\.", " ", colnames(std_df))
 std_df
@@ -56,14 +57,14 @@ The relationship between both variables with covariance and correlation:
 
 * Covariance
 ```{r}
-covariance <- cov(random_vars$income, random_vars$age)
+covariance <- cov(df_random_vars$income, df_random_vars$age)
 paste("Covariance is",covariance)
 ```  
 The covariance of `29700.15` between income and age suggests a positive relationship, indicating that as age increases, there tends to be an increase in income, and vice versa.
 
 * Correlation
 ```{r}
-correlation <- cor(random_vars$income, random_vars$age)
+correlation <- cor(df_random_vars$income, df_random_vars$age)
 paste("Correlation is", correlation)
 ```
 The correlation coefficient of `0.55` between income and age suggests a moderate positive linear relationship, indicating that, on average, as age increases, there is a tendency for income to also increase.
@@ -93,21 +94,21 @@ In most cases, correlation is easier to interpret and compare than covariance be
 
 ```{r}
 #The expected value of the income when age<=18:
-cev_income_age_leq_18<- mean(subset(random_vars, age <= 18)$income)
+cev_income_age_leq_18<- mean(subset(df_random_vars, age <= 18)$income)
 paste("Conditional expected value of income for age <= 18:", cev_income_age_leq_18)
 ```  
 * $E[income|age\in[18,65)]$  
 
 ```{r}
 #The expected value of the income when 18<=age<65:
-cev_income_age_bw_18_65<- mean(subset(random_vars, age %in% 18:65)$income)
-paste("Conditional expected value of income for age between 18 to 65:", cev_income_age_bw_18_65)
+cev_income_age_bw_18_65<- mean(subset(df_random_vars, age %in% 18:64)$income)
+paste("Conditional expected value of income for age between 18 to 64:", cev_income_age_bw_18_65)
 ```  
 * $E[income|age>=65]$  
 
 ```{r}
 #The expected value of the income when age>=65:
-cev_income_age_geq_65<- mean(subset(random_vars, age >= 65)$income) 
+cev_income_age_geq_65<- mean(subset(df_random_vars, age >= 65)$income) 
 paste("Conditional expected value of income for age >= 65:", cev_income_age_geq_65)
 
 ```  
