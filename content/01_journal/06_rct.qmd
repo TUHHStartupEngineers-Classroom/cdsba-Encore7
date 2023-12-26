@@ -2,6 +2,110 @@
 title: "Randomized Controlled Trials"
 ---
 
+# Assignment
+
+------------------------------------------------------------------------
+
+> Loading the data set abtest_online
+
+```{r}
+df_abtest_online  <- readRDS("../../Causal_Data_Science_Data/abtest_online.rds")
+df_abtest_online
+```
+
+### Task 1:
+
+Plotting the covariates to check the balance across the groups
+
+* *Treatment Group*: chatbot = `TRUE`
+
+* *Control Group*: chatbot = `FALSE`
+
+```{r}
+#| warning: false
+library(tidyverse)
+
+df_abtest_online %>% 
+  group_by(chatbot) %>% 
+  summarise(mean_outcome = mean(purchase_amount))
+```
 ::: callout-note
-You can delete everything in here and start fresh.
+The average outcome of the non-chatbot group is higher.
+:::
+
+```{r}
+library(ggplot2)
+
+compare_purchase_amount <- 
+  ggplot(df_abtest_online, 
+         aes(x = chatbot, 
+             y = purchase_amount, 
+             color = as.factor(chatbot))) +
+  stat_summary(geom = "errorbar", 
+               width = .5,
+               fun.data = "mean_se", 
+               fun.args = list(mult=1.96),
+               show.legend = F) +
+  labs(x = NULL, y = "purchase_amount", title = "Difference in purchase amount")
+```
+
+> Plot with outcome purchase amount
+
+```{r}
+compare_purchase_amount
+```
+> The above two plots with outcome represents covariate balance between the two groups.
+
+### Task 2:
+
+```{r}
+lm_sales_ate <- lm(purchase_amount ~ chatbot, data = df_abtest_online)
+summary(lm_sales_ate)
+```
+> The variable chatbot appears to exert a `negative` influence on the purchase amount. This suggests that the presence of the chatbot has led to a decline in sales, consequently reducing the purchase amount.
+
+### Task 3:
+
+> Subgroup-Specific effects by including an interaction
+
+```{r}
+lm_cate1 <- lm(purchase_amount ~ chatbot * mobile_device, data = df_abtest_online)
+
+lm_cate2 <- lm(purchase_amount ~ chatbot * previous_visit, data = df_abtest_online)
+
+lm_cate3 <- lm(purchase_amount ~ chatbot * mobile_device + previous_visit, data = df_abtest_online)
+
+lm_cate4 <- lm(purchase_amount ~ chatbot * mobile_device + chatbot * previous_visit, data = df_abtest_online)
+```
+
+> Summary for lm_cate4 : The R^2^ value for `lm_cate4` is highest among above 4 interaction
+
+```{r}
+summary(lm_cate4)
+```
+
+### Task 4:
+
+```{r}
+lm_binary <- glm(purchase ~ chatbot * mobile_device + chatbot * previous_visit, family = binomial(link = 'logit'), data = df_abtest_online)
+summary(lm_binary)
+```
+### Interpretation of Coefficient:
+
+The coefficient in the logistic regression output represents the log-odds of making a purchase when a particular variable is present compared to when it's not. However, these coefficients are not as intuitively interpretative as in linear regression.
+
+* To interpret the coefficient:
+
+  + If the coefficient is positive, it suggests an increase in the log-odds of making a purchase when the chatbot is present.
+  
+  + If the coefficient is negative, it suggests a decrease in the log-odds of making a purchase when the chatbot is present.
+  
+* Odds Ratio:
+
+  + The exponentiated coefficient gives the odds ratio. If the odds ratio is greater than 1, it implies an increase in the odds of making a purchase. If it's less than 1, it implies a decrease.
+
+  + For example, if the odds ratio is 1.5, it means the odds of making a purchase are 50% higher when the chatbot is present compared to when it's not.
+
+::: callout-note
+In summary, the logistic regression helps understand how the presence of the variables influences the likelihood of a customer making a purchase. The coefficient and odds ratio provide insights into the direction and magnitude of this influence.
 :::

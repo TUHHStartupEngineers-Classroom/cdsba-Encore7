@@ -2,6 +2,113 @@
 title: "Directed Acyclic Graphs"
 ---
 
+# Assignment
+
+------------------------------------------------------------------------
+
+### Task 1:
+
+```{r}
+library(tidyverse)
+library(dagitty)
+library(ggdag)
+library(ggplot2)
+
+dag <- 'dag {
+bb="0,0,1,1"
+Parking [exposure,pos="0.1,0.5"]
+Sales [outcome,pos="0.5,0.5"]
+Location [pos="0.5,1"]
+Parking -> Sales
+Location -> Parking
+Location -> Sales
+}
+'
+ggdag_status(dag) +
+theme_dag() +
+theme(plot.background = element_rect(fill = "lightblue"))
+```
+
+### Task 2:
+
+> Loading the customer_sat data set
+
+```{r}
+df_customer_sat <- readRDS("../../Causal_Data_Science_Data/customer_sat.rds")
+head(df_customer_sat)
+```
+
+#### 1.   Regress `satisfaction` on `follow_ups`
+
+```{r}
+lm_model1 <- lm(satisfaction ~ follow_ups, data = df_customer_sat)
+```
+> Summary
+
+```{r}
+summary(lm_model1)
+```
+
+#### 2.   Regress `satisfaction` on `follow_ups` and account for `subscription`
+
+```{r}
+lm_model_2 <- lm(satisfaction ~ follow_ups + subscription, data = df_customer_sat)
+```
+> Summary
+
+```{r}
+summary(lm_model_2)
+```
+
+
+### Task 3:
+
+* Common Predictors:
+
+  + Both models include an intercept and the predictor variable follow_ups.
+  + The coefficient for follow_ups is negative in Model 1 and positive in Model 2.
+
+* Additional Predictors in Model 2:
+
+ + Model 2 includes two additional predictor variables: subscriptionPremium and subscriptionPremium+.
+ + These variables have positive coefficients, indicating a positive impact on the dependent variable.
+
+* Possible Explanation:
+
+  + The introduction of subscription-related predictors (subscriptionPremium and subscriptionPremium+) in Model 2 might be associated with a change in the business strategy or customer segmentation.
+  + The positive coefficients for subscription-related predictors in Model 2 suggest that having a premium subscription or a premium+ subscription is associated with higher values of the dependent variable.
+
+* Overall Model Performance:
+
+  + Model 2 has a higher adjusted R-squared (0.9487) compared to Model 1 (0.6316), indicating that the predictors in Model 2 explain a larger proportion of the variance in the dependent variable.
+
+* Statistical Significance:
+
+  + All coefficients in Model 2, including the intercept, follow_ups, and subscription-related predictors, are statistically significant.
+  
 ::: callout-note
-You can delete everything in here and start fresh.
+In summary, the differences in coefficients between the two models can be attributed to the introduction of new predictors related to subscription types in Model 2. The positive coefficients for subscription-related predictors suggest that these subscriptions contribute significantly to the higher values of the dependent variable in the presence of follow-ups.
 :::
+
+### Task 4
+
+> Without Conditioning on Subscription
+
+```{r}
+simps_not_cond  <- ggplot(df_customer_sat, aes(x = follow_ups, y = satisfaction)) +
+  geom_point(alpha = .8) +
+  stat_smooth(method = "lm", se = F)
+
+simps_not_cond
+```
+
+> Conditioning on Subscription
+
+```{r}
+simps_cond <- ggplot(df_customer_sat, aes(x = follow_ups, y = satisfaction, color = subscription )) +
+  geom_point(alpha = .8) +
+  stat_smooth(method = "lm", se = F) +
+  theme(legend.position = "right")
+
+simps_cond 
+```
