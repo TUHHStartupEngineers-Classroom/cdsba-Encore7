@@ -22,7 +22,7 @@ head(df_coupon)
 
 ### Task 1:
 
-* Sensitive change in result by running the analysis with half the bandwidth
+#### Sensitive change in result by running the analysis with half the bandwidth
 
 ```{r}
 # Specify bandwidth
@@ -80,7 +80,7 @@ dep_var_bw <-
 dep_var_bw
 ```
 
-* Sensitive change in result by running the analysis with double the bandwidth
+#### Sensitive change in result by running the analysis with double the bandwidth
 
 ```{r}
 # Specify bandwidth

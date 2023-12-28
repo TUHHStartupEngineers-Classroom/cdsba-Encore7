@@ -9,21 +9,20 @@ title: "Directed Acyclic Graphs"
 ### Task 1:
 
 ```{r}
+#| warning: false
 library(tidyverse)
 library(dagitty)
 library(ggdag)
 library(ggplot2)
 
 dag <- 'dag {
-bb="0,0,1,1"
-Parking [exposure,pos="0.1,0.5"]
-Sales [outcome,pos="0.5,0.5"]
-Location [pos="0.5,1"]
-Parking -> Sales
-Location -> Parking
-Location -> Sales
-}
-'
+  Parking [exposure,pos="0.1,0.5"]
+  Sales [outcome,pos="0.5,0.5"]
+  Location [pos="0.3,1"]
+  Parking -> Sales
+  Location -> Parking
+  Location -> Sales
+}'
 ggdag_status(dag) +
 theme_dag() +
 theme(plot.background = element_rect(fill = "lightblue"))
