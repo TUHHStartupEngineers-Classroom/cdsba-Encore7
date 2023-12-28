@@ -2,6 +2,129 @@
 title: "Difference-in-Differences"
 ---
 
+# Assignment
+
+------------------------------------------------------------------------
+
+> Loading the data set hospdd
+
+```{r}
+#| warning: false
+library(dplyr)
+
+df_hospdd  <- readRDS("../../Causal_Data_Science_Data/hospdd.rds")
+head(df_hospdd)
+```
+
+> Hospitals in which the new admission procedure was implemented
+
+```{r}
+treatment_hospital <- df_hospdd %>%
+  group_by(hospital) %>%
+  summarise(procedure_count = sum(procedure))
+
+treatment_hospital
+```
+The above Table shows that out of 46 hospitals, hospitals with label 1 to 18 had the new admission procedure whereas the hospitals with label 19 to 46 had the old admission procedure.
+
+> Months in which the new admission procedure was implemented
+
+```{r}
+treatment_month <- df_hospdd %>%
+  group_by(month) %>%
+  summarise(procedure_count = sum(procedure))
+
+treatment_month
+```
+
+The above Table shows that out of 7 months, months with label 4,5,6 and 7 had the new admission procedure whereas the months with label 1,2 and 3 had the old admission procedure.
+
 ::: callout-note
-You can delete everything in here and start fresh.
+
+* Treatment variable = procedure
+* Before Treatment:
+  + Treatment Group: 18 hospitals before month 4
+  + Control Group: 28 hospitals before month 4
+* After Treatment:
+  + Treatment Group: 18 hospitals from month 4
+  + Control Group: 28 hospitals from month 4
+  
 :::
+
+```{r}
+treatment_hospital <- df_hospdd %>%
+  group_by(hospital, month) %>%
+  summarise(procedure_count = sum(procedure), .groups = 'drop')
+
+treatment_hospital
+```
+
+### Task 1:
+
+> Mean satisfaction for treated and control hospitals before and after the treatment
+
+```{r}
+# Step 1: Subset the data for treatment and control hospitals
+treated_hospitals <- df_hospdd %>% filter(procedure == 1)
+control_hospitals <- df_hospdd %>% filter(procedure == 0)
+
+# Step 2: Compute mean satisfaction for treated hospitals before and after treatment
+mean_satis_before_treated <- treated_hospitals %>%
+  filter(month < 4) %>%
+  pull(satis) %>%
+  mean(na.rm = TRUE)
+mean_satis_before_treated = 0
+
+mean_satis_after_treated <- treated_hospitals %>%
+  filter(month >= 4) %>%
+  pull(satis) %>%
+  mean(na.rm = TRUE)
+
+# Step 3: Compute mean satisfaction for control hospitals before and after treatment
+mean_satis_before_control <- control_hospitals %>%
+  filter(month < 4) %>%
+  pull(satis) %>%
+  mean(na.rm = TRUE)
+
+mean_satis_after_control <- control_hospitals %>%
+  filter(month >= 4) %>%
+  pull(satis) %>%
+  mean(na.rm = TRUE)
+
+# Step 4: Print the results
+cat("Mean Satisfaction - Before (Treated):", mean_satis_before_treated, "\n")
+cat("Mean Satisfaction - After (Treated):", mean_satis_after_treated, "\n")
+cat("Mean Satisfaction - Before (Control):", mean_satis_before_control, "\n")
+cat("Mean Satisfaction - After (Control):", mean_satis_after_control, "\n")
+```
+
+> DiD
+
+```{r}
+diff_before_treatment = mean_satis_before_treated - mean_satis_before_control
+diff_after_treatment = mean_satis_after_treated - mean_satis_after_control
+
+did_estimate <- diff_after_treatment - diff_before_treatment
+did_estimate
+```
+
+### Task 2:
+
+* month + hospital
+
+```{r}
+model1<- lm(satis ~ month + hospital, data = df_hospdd)
+model1
+```
+* as.factor(month) + as.factor(hospital)
+
+```{r}
+model2 <- lm(satis ~ as.factor(month) + as.factor(hospital), data = df_hospdd)
+model2
+```
+
+>Interpretation:
+
+* Model 1 assumes that month and hospital are numeric variables, and it models a linear relationship between these numeric variables and satis.
+
+* Model 2 treats month and hospital as factors (categorical variables), and it models the categorical effects of each level of month and hospital on satis.
