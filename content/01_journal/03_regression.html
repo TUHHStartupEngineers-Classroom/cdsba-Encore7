@@ -458,37 +458,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; F-statistic: 62.21 on 37 and 143 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>The significance of the parameters impacting the car price is denoted by the number of asterisks (*). The statistical significance for the mentioned columns is exceptionally low, indicating a high level of significance.</p>
-<ul>
-<li><p><em>enginetypeohc</em></p></li>
-<li><p><em>enginetypeohcv</em></p></li>
-<li><p><em>cylindernumberfive</em></p></li>
-<li><p><em>cylindernumberfour</em></p></li>
-<li><p><em>enginesize</em></p></li>
-<li><p><em>stroke</em></p></li>
-<li><p><em>peakrpm</em></p></li>
-</ul>
+<p>The significance of the features for the determination of the car price is denoted by the number of asterisks (*) in the model summary. The no. of asterisks could be interpreted as, if the statistical significance of a particular column is low, that indicate a high level of significance.</p>
+<p>The columns with decent significance are:</p>
+<p><em>enginetypeohc</em>, <em>enginetypeohcv</em>, <em>cylindernumberfive</em>, <em>cylindernumberfour</em>, <em>enginesize</em>, <em>stroke</em>, and <em>peakrpm</em></p>
 </section>
 <section id="task-4" class="level3">
 <h3 class="anchored" data-anchor-id="task-4">Task 4:</h3>
 <p>Choice of the Regressor: <code>enginesize</code></p>
 <ul>
-<li><p><em>Data type</em>: As observed in the linear regression summary, the <code>enginesize</code> variable is of <code>numeric</code> data type, accommodating both integer and decimal values. In this data set, it is notable for having integer values such as 130 152 109, etc.</p></li>
+<li><p><em>Data type</em>: As observed in the linear regression summary, the <code>enginesize</code> variable is of <code>numeric</code> data type, accommodating both integer and decimal values. In this data set, it is notable for having integer values such as 130, 152, 109, etc.</p></li>
 <li><p><em>Effect on Price:</em> The coefficient of the <code>enginesiz</code> is 125.934. This value indicates that for each unit increase in size, the price is expected to increase by 125.934 units, keeping other variable constants.</p></li>
 <li><p><em>Statistical Significance</em>: The p-value for <code>enginesize</code>, which stands at <code>5 × 10^-6^</code>, is notably small. This suggests a high level of significance, indicating a substantial effect on the Price.</p></li>
 </ul>
 </section>
 <section id="task-5" class="level3">
 <h3 class="anchored" data-anchor-id="task-5">Task 5:</h3>
-<div class="cell" data-hash="03_regression_cache/html/unnamed-chunk-7_b8a152edc778dc836307128825e172a1">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb13-2"><a href="#cb13-2"></a>df_car_prices_upd <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_car_prices, <span class="at">seat_heating =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb13-3"><a href="#cb13-3"></a>lm_model_sh <span class="ot">&lt;-</span> <span class="fu">lm</span>(price <span class="sc">~</span> . <span class="sc">+</span> seat_heating, <span class="at">data =</span> df_car_prices_upd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="03_regression_cache/html/unnamed-chunk-7_0d590e9511da58fc06c15d1272ff2694">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>df_car_prices_upd <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df_car_prices, <span class="at">seat_heating =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a>lm_model_sh <span class="ot">&lt;-</span> <span class="fu">lm</span>(price <span class="sc">~</span> . <span class="sc">+</span> seat_heating, <span class="at">data =</span> df_car_prices_upd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p>Summary of the new model to see the coefficient of ‘seat_heating’</p>
 </blockquote>
-<div class="cell" data-hash="03_regression_cache/html/unnamed-chunk-8_aec85e71e9224ede8ca83b273adb7f8d">
+<div class="cell" data-hash="03_regression_cache/html/unnamed-chunk-8_b29c1ca1a564fd25e3cd4c17c2c47d26">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">summary</span>(lm_model_sh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; 
@@ -548,7 +540,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; F-statistic: 62.21 on 37 and 143 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>From the table, it’s evident that the variable seat_heating exhibits no significant impact on the price. The regression model fails to establish any correlation between the price and seat_heating, resulting in a coefficient marked as NA (Not Available). This absence of correlation may be attributed to the phenomenon known as <code>Multi-Collinearity</code>. In this case, the seat_heating variable is consistently set to <code>True</code> without any variation, rendering the model incapable of estimating a coefficient for it.</p>
+<p>From the table, it can be seen that the variable seat_heating shows no significant impact on the price. The regression model fails to establish any correlation between the price and seat_heating, resulting in a coefficient marked as NA (Not Available). This absence of correlation may be attributed to the phenomenon known as <code>Multi-Collinearity</code>. In this case, the seat_heating variable is consistently set to <code>True</code> without any variation, due to which the model is unable to calculate the coefficient for it.</p>
 
 
 </section>

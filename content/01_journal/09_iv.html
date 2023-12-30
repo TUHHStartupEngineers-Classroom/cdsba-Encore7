@@ -311,39 +311,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>Correlation Analysis:</p>
 </blockquote>
-<p>The correlation between rand_enc and used_ftr is 0.204, indicating a weak positive correlation. The correlation between used_ftr and time_spent is 0.705, indicating a moderate to strong positive correlation. The correlation between rand_enc and time_spent is 0.130, indicating a weak positive correlation.</p>
-<blockquote class="blockquote">
-<p>Assumptions for Instrumental Variable Estimation:</p>
-</blockquote>
-<p>Instrumental variable (IV) estimation relies on several key assumptions:</p>
 <ul>
-<li><p>Relevance:</p>
-<ul>
-<li><p>The instrumental variable should be correlated with the endogenous variable (used_ftr) but not directly related to the outcome variable (time_spent).</p></li>
-<li><p>Based on the correlation matrix, it’s important to check whether rand_enc is a relevant instrument. A correlation of 0.204 with used_ftr suggests some relevance.</p></li>
-</ul></li>
-<li><p>Exogeneity:</p>
-<ul>
-<li><p>The instrumental variable should be uncorrelated with the error term in the regression of the endogenous variable on the instruments.</p></li>
-<li><p>This assumption may not be directly observable from the correlation matrix. It requires further testing, such as examining residual plots.</p></li>
-</ul></li>
-<li><p>No Measurement Error:</p>
-<ul>
-<li><p>The instrumental variable should be measured precisely and not subject to measurement error.</p></li>
-<li><p>This assumption cannot be directly assessed from the correlation matrix and may require additional information about the measurement process.</p></li>
-</ul></li>
-<li><p>Independence:</p>
-<ul>
-<li><p>The instrumental variable should be independent of unobserved factors that affect the outcome variable.</p></li>
-<li><p>This assumption is challenging to test directly. It requires careful consideration of potential confounding factors and unobserved variables.</p></li>
-</ul></li>
+<li>The correlation between rand_enc and used_ftr is 0.204, indicating a weak positive correlation.</li>
+<li>The correlation between used_ftr and time_spent is 0.705, indicating a moderate to strong positive correlation.</li>
+<li>The correlation between rand_enc and time_spent is 0.130, indicating a weak positive correlation.</li>
 </ul>
 <blockquote class="blockquote">
 <p>Overall Assessment:</p>
 </blockquote>
 <ul>
-<li><p>The correlation between rand_enc and used_ftr suggests some relevance, but other assumptions require more detailed investigation. It’s essential to conduct further diagnostic tests, such as examining residuals, testing for endogeneity, and considering the potential impact of unobserved variables. Consideration:</p></li>
-<li><p>Instrumental variable estimation may be considered if the assumptions are met or found to be reasonable after thorough testing. However, the decision to use instrumental variables should be made cautiously, and the results should be interpreted with awareness of the assumptions and potential limitations.</p></li>
+<li>The correlations between the randomly selected customer and other variables appear weak.</li>
+<li>This indicates potential endogeneity issues.</li>
+<li>Instrumental variable estimation can be employed to mitigate bias in such cases.</li>
+<li>Unobserved factors may impact both the utilized features and the time spent.</li>
+<li>Instrumental variable estimation becomes useful in addressing omitted variable bias under these circumstances.</li>
+<li>This approach helps account for unobserved variables, enhancing the robustness of the analysis.</li>
+<li>A valid instrumental variable for estimation should be relevant and exhibit no direct correlation with the outcome variable(time_spent), except through its association with the features.</li>
 </ul>
 </section>
 <section id="task-4" class="level3">
@@ -725,7 +708,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"openEffect":"zoom","descPosition":"bottom","selector":".lightbox"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true,"closeEffect":"zoom"});</script>
 
 
 
