@@ -248,9 +248,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="task-1" class="level3">
 <h3 class="anchored" data-anchor-id="task-1">Task 1:</h3>
-<ul>
-<li>Sensitive change in result by running the analysis with half the bandwidth</li>
-</ul>
+<section id="sensitive-change-in-result-by-running-the-analysis-with-half-the-bandwidth" class="level4">
+<h4 class="anchored" data-anchor-id="sensitive-change-in-result-by-running-the-analysis-with-half-the-bandwidth">Sensitive change in result by running the analysis with half the bandwidth</h4>
 <div class="cell" data-hash="10_rdd_cache/html/unnamed-chunk-2_429a651d2c431049e7db35611faaa072">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Specify bandwidth</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>bw <span class="ot">&lt;-</span> (c0 <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">2.5</span>, <span class="fl">2.5</span>))</span>
@@ -323,9 +322,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<ul>
-<li>Sensitive change in result by running the analysis with double the bandwidth</li>
-</ul>
+</section>
+<section id="sensitive-change-in-result-by-running-the-analysis-with-double-the-bandwidth" class="level4">
+<h4 class="anchored" data-anchor-id="sensitive-change-in-result-by-running-the-analysis-with-double-the-bandwidth">Sensitive change in result by running the analysis with double the bandwidth</h4>
 <div class="cell" data-hash="10_rdd_cache/html/unnamed-chunk-5_fb1c04a386cb46e4bcb34ac81dee4ff8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Specify bandwidth</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>bw <span class="ot">&lt;-</span> (c0 <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">10</span>))</span>
@@ -411,6 +410,7 @@ Note
 <p>This indicates LATE values are sensitive to the bandwidth chosen. The LATE is higher when the bandwidth is doubled and slightly lower when the bandwidth is halved. A larger bandwidth captures a broader range of the data, possibly introducing more variation. A smaller bandwidth might not capture enough of the treatment’s effect, leading to a smaller estimate.</p>
 </div>
 </div>
+</section>
 </section>
 <section id="task-2" class="level3">
 <h3 class="anchored" data-anchor-id="task-2">Task 2:</h3>
@@ -815,7 +815,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","loop":true});</script>
 
 
 
