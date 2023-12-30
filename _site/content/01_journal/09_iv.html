@@ -352,7 +352,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #&gt; F-statistic:   331 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<p>The initial estimate stands at 10.82, while the Instrumental Variable (IV) estimate is marginally lower at 9.73. The initial estimate, often referred to as the naive estimate, tends to be on the higher side as it overlooks concealed factors associated with both feature usage and time spent on the app, commonly referred to as encouragement. The IV estimate rectifies this by accounting for these hidden factors, resulting in a more precise and slightly lower estimate. Unlike the naive estimate, which encompasses both the impact of feature usage on app time and the influence of encouragement, the IV estimate isolates the effect of feature usage, leading to a more accurate depiction.</p>
+<ul>
+<li>The initial estimate is 10.82, while the IV estimate is slightly lower at 9.73.</li>
+<li>The initial estimate, often termed the naive estimate, tends to be higher.</li>
+<li>The IV estimate (9.73) corrects for hidden factors associated with encouragement.</li>
+<li>It provides a more precise estimate by accounting for these concealed factors, resulting in a slightly lower value.</li>
+<li>Unlike the naive estimate, which includes both the impact of feature usage and the influence of encouragement, the IV estimate isolates the effect of feature usage.</li>
+<li>This isolation leads to a more accurate depiction of the impact of feature usage on app time spent.</li>
+</ul>
 
 
 </section>
@@ -708,7 +715,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true,"closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":true,"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom"});</script>
 
 
 

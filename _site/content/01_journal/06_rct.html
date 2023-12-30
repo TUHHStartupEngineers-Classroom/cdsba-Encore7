@@ -417,17 +417,17 @@ Note
 </section>
 <section id="interpretation-of-coefficient" class="level3">
 <h3 class="anchored" data-anchor-id="interpretation-of-coefficient">Interpretation of Coefficient:</h3>
-<p>The coefficient in the logistic regression output represents the log-odds of making a purchase when a particular variable is present compared to when it’s not. However, these coefficients are not as intuitively interpretative as in linear regression.</p>
+<p>The coefficient in the logistic regression output represents the log-odds of making a purchase when a particular variable is present compared to when it’s not. However, these coefficients are not as interpretative as it was in linear regression.</p>
 <ul>
-<li><p>To interpret the coefficient:</p>
+<li><p>Interpretation of the coefficient:</p>
 <ul>
 <li><p>If the coefficient is positive, it suggests an increase in the log-odds of making a purchase when the chatbot is present.</p></li>
 <li><p>If the coefficient is negative, it suggests a decrease in the log-odds of making a purchase when the chatbot is present.</p></li>
 </ul></li>
 <li><p>Odds Ratio:</p>
 <ul>
-<li><p>The exponentiated coefficient gives the odds ratio. If the odds ratio is greater than 1, it implies an increase in the odds of making a purchase. If it’s less than 1, it implies a decrease.</p></li>
-<li><p>For example, if the odds ratio is 1.5, it means the odds of making a purchase are 50% higher when the chatbot is present compared to when it’s not.</p></li>
+<li><p>The exponent coefficient gives the odds ratio. If the odds ratio is greater than 1, it implies an increase in the odds of making a purchase. If it’s less than 1, it implies a decrease.</p></li>
+<li><p>For example, if the odds ratio is 1.6, it means the odds of making a purchase are 60% higher when the chatbot is present compared to when it’s not.</p></li>
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -798,7 +798,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":true,"descPosition":"bottom","openEffect":"zoom"});</script>
 
 
 
