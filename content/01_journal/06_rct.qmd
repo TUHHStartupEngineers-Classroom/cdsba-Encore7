@@ -92,9 +92,9 @@ summary(lm_binary)
 ```
 ### Interpretation of Coefficient:
 
-The coefficient in the logistic regression output represents the log-odds of making a purchase when a particular variable is present compared to when it's not. However, these coefficients are not as intuitively interpretative as in linear regression.
+The coefficient in the logistic regression output represents the log-odds of making a purchase when a particular variable is present compared to when it's not. However, these coefficients are not as interpretative as it was in linear regression.
 
-* To interpret the coefficient:
+* Interpretation of the coefficient:
 
   + If the coefficient is positive, it suggests an increase in the log-odds of making a purchase when the chatbot is present.
   
@@ -102,9 +102,9 @@ The coefficient in the logistic regression output represents the log-odds of mak
   
 * Odds Ratio:
 
-  + The exponentiated coefficient gives the odds ratio. If the odds ratio is greater than 1, it implies an increase in the odds of making a purchase. If it's less than 1, it implies a decrease.
+  + The exponent coefficient gives the odds ratio. If the odds ratio is greater than 1, it implies an increase in the odds of making a purchase. If it's less than 1, it implies a decrease.
 
-  + For example, if the odds ratio is 1.5, it means the odds of making a purchase are 50% higher when the chatbot is present compared to when it's not.
+  + For example, if the odds ratio is 1.6, it means the odds of making a purchase are 60% higher when the chatbot is present compared to when it's not.
 
 ::: callout-note
 In summary, the logistic regression helps understand how the presence of the variables influences the likelihood of a customer making a purchase. The coefficient and odds ratio provide insights into the direction and magnitude of this influence.

@@ -72,18 +72,18 @@ summary(lm_model_2)
  + Model 2 includes two additional predictor variables: subscriptionPremium and subscriptionPremium+.
  + These variables have positive coefficients, indicating a positive impact on the dependent variable.
 
-* Possible Explanation:
+* Explanation:
 
-  + The introduction of subscription-related predictors (subscriptionPremium and subscriptionPremium+) in Model 2 might be associated with a change in the business strategy or customer segmentation.
+  + The introduction of subscription-related predictors (subscriptionPremium and subscriptionPremium+) in Model 2 might be associated with a change in the business strategy.
   + The positive coefficients for subscription-related predictors in Model 2 suggest that having a premium subscription or a premium+ subscription is associated with higher values of the dependent variable.
 
 * Overall Model Performance:
 
-  + Model 2 has a higher adjusted R-squared (0.9487) compared to Model 1 (0.6316), indicating that the predictors in Model 2 explain a larger proportion of the variance in the dependent variable.
+  + Model 2 has a higher adjusted R-squared (0.9487) compared to Model 1 (0.6316), indicating that the predictors in Model 2 explain a larger proportion of the variance for the dependent variable.
 
 * Statistical Significance:
 
-  + All coefficients in Model 2, including the intercept, follow_ups, and subscription-related predictors, are statistically significant.
+  + All coefficients in Model 2, including the follow_ups, and subscription-related predictors, are statistically significant.
   
 ::: callout-note
 In summary, the differences in coefficients between the two models can be attributed to the introduction of new predictors related to subscription types in Model 2. The positive coefficients for subscription-related predictors suggest that these subscriptions contribute significantly to the higher values of the dependent variable in the presence of follow-ups.

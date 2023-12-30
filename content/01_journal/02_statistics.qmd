@@ -49,7 +49,7 @@ std_df
 
 ### Task 2:
 
-No, it doesn't makes sense to compare the standard deviations as comparing the standard deviations of age and income directly may not provide meaningful insights, as they are measured in different units.These two measures reflect the variability within each respective variable, but they do not offer a direct comparison between the two variables.
+No, it doesn't makes sense to compare the standard deviations of age and income directly as this may not provide meaningful insights, as they are measured in different units. These two measures reflect the variability within each of the variable i.e age and income, but it do not offer a direct comparison between the two variables.
 
 ### Task 3: 
 
@@ -81,12 +81,12 @@ Both correlation and covariance are measures of the relationship between two var
 
 * Correlation:
 
-  + *Interpretation:* Correlation, on the other hand, standardizes the measure of association, providing a unit less value between -1 and 1. A correlation of 1 indicates a perfect positive linear relationship, -1 indicates a perfect negative linear relationship, and 0 indicates no linear relationship.
+  + *Interpretation:* Correlation, on the other hand, standardizes the measure of association, the value ranges between -1 and 1. A correlation of 1 indicates a perfect positive linear relationship, -1 indicates a perfect negative linear relationship, and 0 indicates no linear relationship.
   + *Scale:* The scale of correlation is standardized, making it easier to compare and interpret across different variable pairs.
-  + *Interpretation Advantage:* Correlation is more interpretable than covariance due to its standardized scale. You can readily compare the strength and direction of relationships between different pairs of variables.
+  + *Interpretation Advantage:* Correlation is more interpretable than covariance due to its standardized scale. To evaluate the strength and direction of relationships between various pairs of variables.
 
 :::{.callout-tip title="Conclusion"}
-In most cases, correlation is easier to interpret and compare than covariance because it provides a standardized measure that ranges from -1 to 1. This allows for a more straightforward understanding of the strength and direction of the relationship between two variables. If the goal is to assess the degree and direction of association while avoiding scale-related challenges, correlation is generally preferred over covariance. 
+In most cases, correlation is easier to interpret and compare than covariance because it provides a standardized measure that ranges from -1 to 1. This allows a straight understanding of the strength and direction of the relationship between two variables. If the goal is to evaluate the degree and direction of association while avoiding scale-related challenges, correlation is generally preferred over covariance. 
 :::
   
 5. The conditional expected values:

@@ -68,8 +68,8 @@ summary(model_cem)
 > Custom coarsening
 
 ```{r}
-cutpoints <- list(age = seq(24, 65, 18), 
-                  pre_avg_purch = seq(3, 200, 50))
+cutpoints <- list(age = seq(26, 60, 16), 
+                  pre_avg_purch = seq(3, 250, 55))
 cem_coars <- matchit(card ~ sex + age + pre_avg_purch, 
                      data = df_membership, 
                      method = "cem", 

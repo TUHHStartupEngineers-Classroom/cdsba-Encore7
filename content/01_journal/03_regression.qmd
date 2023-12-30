@@ -64,38 +64,26 @@ lm_model <- lm(price ~ ., data = df_car_prices)
 summary(lm_model)
 ```
 
-The significance of the parameters impacting the car price is denoted by the number of asterisks (*). The statistical significance for the mentioned columns is exceptionally low, indicating a high level of significance.
+The significance of the features for the determination of the car price is denoted by the number of asterisks (*) in the model summary. The no. of asterisks could be interpreted as, if the statistical significance of a particular column is low, that indicate a high level of significance.
 
-* *enginetypeohc*
+The columns with decent significance are:
 
-* *enginetypeohcv*
-
-* *cylindernumberfive*
-
-* *cylindernumberfour*
-
-* *enginesize*
-
-* *stroke*
-
-* *peakrpm*
+*enginetypeohc*, *enginetypeohcv*, *cylindernumberfive*, *cylindernumberfour*, *enginesize*, *stroke*, and *peakrpm*
 
 ### Task 4:
 
 Choice of the Regressor: `enginesize`
 
-* *Data type*: As observed in the linear regression summary, the `enginesize` variable is of `numeric` data type, accommodating both integer and decimal values. In this data set, it is notable for having integer values such as 130 152 109, etc.
+* *Data type*: As observed in the linear regression summary, the `enginesize` variable is of `numeric` data type, accommodating both integer and decimal values. In this data set, it is notable for having integer values such as 130, 152, 109, etc.
 
 * *Effect on Price:* The coefficient of the `enginesiz` is 125.934. This value indicates that for each unit increase in size, the price is expected to increase by 125.934 units, keeping other variable constants.
 
 * *Statistical Significance*: The p-value for `enginesize`, which stands at `5 × 10^-6^`, is notably small. This suggests a high level of significance, indicating a substantial effect on the Price.
 
-
 ### Task 5:
 
 ```{r}
 #| warning: false
-library(dplyr)
 df_car_prices_upd <- mutate(df_car_prices, seat_heating = TRUE)
 lm_model_sh <- lm(price ~ . + seat_heating, data = df_car_prices_upd)
 ```
@@ -103,7 +91,6 @@ lm_model_sh <- lm(price ~ . + seat_heating, data = df_car_prices_upd)
 > Summary of the new model to see the coefficient of 'seat_heating'
 
 ```{r}
-#| warning: false
 summary(lm_model_sh)
 ```
-From the table, it's evident that the variable seat_heating exhibits no significant impact on the price. The regression model fails to establish any correlation between the price and seat_heating, resulting in a coefficient marked as NA (Not Available). This absence of correlation may be attributed to the phenomenon known as `Multi-Collinearity`. In this case, the seat_heating variable is consistently set to `True` without any variation, rendering the model incapable of estimating a coefficient for it.
+From the table, it can be seen that the variable seat_heating shows no significant impact on the price. The regression model fails to establish any correlation between the price and seat_heating, resulting in a coefficient marked as NA (Not Available). This absence of correlation may be attributed to the phenomenon known as `Multi-Collinearity`. In this case, the seat_heating variable is consistently set to `True` without any variation, due to which the model is unable to calculate the coefficient for it.

@@ -225,10 +225,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Assignment</h1>
 <hr>
 <p>Loading and Overview of the Table:</p>
-<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-1_0d7c2370e91c528408d0d22f34cff5c5">
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-1_c20d7686b8f116eaf8215a3afb059dfa">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Loading file random_vars:</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>random_vars <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"../../Causal_Data_Science_Data/random_vars.rds"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a>random_vars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a>df_random_vars <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"../../Causal_Data_Science_Data/random_vars.rds"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>df_random_vars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
 <div data-pagedtable="false">
@@ -244,9 +244,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Expected Value</li>
 </ul>
-<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-2_b6cb4401870fb974b947c4d268b4fd18">
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-2_1a5b7806b10c967b8fd54c300200fc9d">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Expected Values:</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>expected_value <span class="ot">&lt;-</span> <span class="fu">sapply</span>(random_vars, mean)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>expected_value <span class="ot">&lt;-</span> <span class="fu">sapply</span>(df_random_vars, mean)</span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="co"># Displaying the Expected Values</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a>expected_values_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"Expected Value of Age"</span> <span class="ot">=</span> expected_value[<span class="st">"age"</span>], <span class="st">"Expected value of Income"</span> <span class="ot">=</span> expected_value[<span class="st">"income"</span>], <span class="at">row.names =</span> <span class="st">''</span>)</span>
 <span id="cb2-5"><a href="#cb2-5"></a><span class="fu">colnames</span>(expected_values_df) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">" "</span>, <span class="fu">colnames</span>(expected_values_df))</span>
@@ -263,9 +263,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Variance</li>
 </ul>
-<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-3_15c1448705ed785abc45cbdf4d5f5ca1">
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-3_b64ab950ece496c0c451252619f79957">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Variance</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>variance <span class="ot">&lt;-</span> <span class="fu">sapply</span>(random_vars, var)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>variance <span class="ot">&lt;-</span> <span class="fu">sapply</span>(df_random_vars, var)</span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="co"># Displaying the Variances</span></span>
 <span id="cb3-4"><a href="#cb3-4"></a>variances_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"Variance of Age"</span> <span class="ot">=</span> variance[<span class="st">"age"</span>], <span class="st">"Variance of Income"</span> <span class="ot">=</span> variance[<span class="st">"income"</span>], <span class="at">row.names =</span> <span class="st">''</span>)</span>
 <span id="cb3-5"><a href="#cb3-5"></a><span class="fu">colnames</span>(variances_df) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">" "</span>, <span class="fu">colnames</span>(variances_df))</span>
@@ -282,9 +282,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Standard Deviation</li>
 </ul>
-<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-4_611a7e0649e517839118c179146991bb">
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-4_6753255e8d78fbbdb077ff77be1f86d1">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Standard Deviation</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>std <span class="ot">&lt;-</span> <span class="fu">sapply</span>(random_vars, sd)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>std <span class="ot">&lt;-</span> <span class="fu">sapply</span>(df_random_vars, sd)</span>
 <span id="cb4-3"><a href="#cb4-3"></a>std_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"Standard Deviation of Age"</span> <span class="ot">=</span> std[<span class="st">"age"</span>], <span class="st">"Standard Deviation of Income"</span> <span class="ot">=</span> std[<span class="st">"income"</span>], <span class="at">row.names =</span> <span class="st">''</span>)</span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="fu">colnames</span>(std_df) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>, <span class="st">" "</span>, <span class="fu">colnames</span>(std_df))</span>
 <span id="cb4-5"><a href="#cb4-5"></a>std_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -300,7 +300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="task-2" class="level3">
 <h3 class="anchored" data-anchor-id="task-2">Task 2:</h3>
-<p>No, it doesn’t makes sense to compare the standard deviations as comparing the standard deviations of age and income directly may not provide meaningful insights, as they are measured in different units.These two measures reflect the variability within each respective variable, but they do not offer a direct comparison between the two variables.</p>
+<p>No, it doesn’t makes sense to compare the standard deviations of age and income directly as this may not provide meaningful insights, as they are measured in different units. These two measures reflect the variability within each of the variable i.e age and income, but it do not offer a direct comparison between the two variables.</p>
 </section>
 <section id="task-3" class="level3">
 <h3 class="anchored" data-anchor-id="task-3">Task 3:</h3>
@@ -308,8 +308,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Covariance</li>
 </ul>
-<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-5_9e22247a0967a6b5524460b41a3902ca">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>covariance <span class="ot">&lt;-</span> <span class="fu">cov</span>(random_vars<span class="sc">$</span>income, random_vars<span class="sc">$</span>age)</span>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-5_04181097d06066b63efbbaa959ffdb2a">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>covariance <span class="ot">&lt;-</span> <span class="fu">cov</span>(df_random_vars<span class="sc">$</span>income, df_random_vars<span class="sc">$</span>age)</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">paste</span>(<span class="st">"Covariance is"</span>,covariance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] "Covariance is 29700.1468458458"</code></pre>
@@ -319,8 +319,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Correlation</li>
 </ul>
-<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-6_16f6f8730d7c751f2b85c6b36afdafdd">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(random_vars<span class="sc">$</span>income, random_vars<span class="sc">$</span>age)</span>
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-6_2f2b3b87f4b9cb775787bf233f001636">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(df_random_vars<span class="sc">$</span>income, df_random_vars<span class="sc">$</span>age)</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="fu">paste</span>(<span class="st">"Correlation is"</span>, correlation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] "Correlation is 0.547943162326476"</code></pre>
@@ -340,9 +340,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><p>Correlation:</p>
 <ul>
-<li><em>Interpretation:</em> Correlation, on the other hand, standardizes the measure of association, providing a unit less value between -1 and 1. A correlation of 1 indicates a perfect positive linear relationship, -1 indicates a perfect negative linear relationship, and 0 indicates no linear relationship.</li>
+<li><em>Interpretation:</em> Correlation, on the other hand, standardizes the measure of association, the value ranges between -1 and 1. A correlation of 1 indicates a perfect positive linear relationship, -1 indicates a perfect negative linear relationship, and 0 indicates no linear relationship.</li>
 <li><em>Scale:</em> The scale of correlation is standardized, making it easier to compare and interpret across different variable pairs.</li>
-<li><em>Interpretation Advantage:</em> Correlation is more interpretable than covariance due to its standardized scale. You can readily compare the strength and direction of relationships between different pairs of variables.</li>
+<li><em>Interpretation Advantage:</em> Correlation is more interpretable than covariance due to its standardized scale. To evaluate the strength and direction of relationships between various pairs of variables.</li>
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Conclusion">
@@ -355,7 +355,7 @@ Conclusion
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In most cases, correlation is easier to interpret and compare than covariance because it provides a standardized measure that ranges from -1 to 1. This allows for a more straightforward understanding of the strength and direction of the relationship between two variables. If the goal is to assess the degree and direction of association while avoiding scale-related challenges, correlation is generally preferred over covariance.</p>
+<p>In most cases, correlation is easier to interpret and compare than covariance because it provides a standardized measure that ranges from -1 to 1. This allows a straight understanding of the strength and direction of the relationship between two variables. If the goal is to evaluate the degree and direction of association while avoiding scale-related challenges, correlation is generally preferred over covariance.</p>
 </div>
 </div>
 <ol start="5" type="1">
@@ -364,9 +364,9 @@ Conclusion
 <ul>
 <li><span class="math inline">\(E[income|age&lt;=18]\)</span>:</li>
 </ul>
-<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-7_cf37377645b16970083beb9ea10aeb55">
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-7_46638c28b387296759fce64f07f82b72">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">#The expected value of the income when age&lt;=18:</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>cev_income_age_leq_18<span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">subset</span>(random_vars, age <span class="sc">&lt;=</span> <span class="dv">18</span>)<span class="sc">$</span>income)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>cev_income_age_leq_18<span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">subset</span>(df_random_vars, age <span class="sc">&lt;=</span> <span class="dv">18</span>)<span class="sc">$</span>income)</span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="fu">paste</span>(<span class="st">"Conditional expected value of income for age &lt;= 18:"</span>, cev_income_age_leq_18)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] "Conditional expected value of income for age &lt;= 18: 389.607438016529"</code></pre>
@@ -375,9 +375,9 @@ Conclusion
 <ul>
 <li><span class="math inline">\(E[income|age\in[18,65)]\)</span></li>
 </ul>
-<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-8_4e7b3f7fadbdf497a9f7d55f445e417e">
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-8_d175cd103a367d9a85da3b08e2a2677e">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">#The expected value of the income when 18&lt;=age&lt;65:</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>cev_income_age_bw_18_65<span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">subset</span>(random_vars, age <span class="sc">%in%</span> <span class="dv">18</span><span class="sc">:</span><span class="dv">64</span>)<span class="sc">$</span>income)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>cev_income_age_bw_18_65<span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">subset</span>(df_random_vars, age <span class="sc">%in%</span> <span class="dv">18</span><span class="sc">:</span><span class="dv">64</span>)<span class="sc">$</span>income)</span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="fu">paste</span>(<span class="st">"Conditional expected value of income for age between 18 to 64:"</span>, cev_income_age_bw_18_65)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] "Conditional expected value of income for age between 18 to 64: 4685.73426573427"</code></pre>
@@ -386,9 +386,9 @@ Conclusion
 <ul>
 <li><span class="math inline">\(E[income|age&gt;=65]\)</span></li>
 </ul>
-<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-9_b7ddea5b18072be4379b17f487f8bc13">
+<div class="cell" data-hash="02_statistics_cache/html/unnamed-chunk-9_87325b525142d0315c0e1ce17c24979a">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#The expected value of the income when age&gt;=65:</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>cev_income_age_geq_65<span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">subset</span>(random_vars, age <span class="sc">&gt;=</span> <span class="dv">65</span>)<span class="sc">$</span>income) </span>
+<span id="cb13-2"><a href="#cb13-2"></a>cev_income_age_geq_65<span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">subset</span>(df_random_vars, age <span class="sc">&gt;=</span> <span class="dv">65</span>)<span class="sc">$</span>income) </span>
 <span id="cb13-3"><a href="#cb13-3"></a><span class="fu">paste</span>(<span class="st">"Conditional expected value of income for age &gt;= 65:"</span>, cev_income_age_geq_65)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#&gt; [1] "Conditional expected value of income for age &gt;= 65: 1777.23728813559"</code></pre>

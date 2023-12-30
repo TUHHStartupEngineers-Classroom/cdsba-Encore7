@@ -48,48 +48,21 @@ summary(model_biased)
 ```{r}
 cor(df_rand_enc)
 ```
->Correlation Analysis:
+> Correlation Analysis:
 
-The correlation between rand_enc and used_ftr is 0.204, indicating a weak positive correlation.
-The correlation between used_ftr and time_spent is 0.705, indicating a moderate to strong positive correlation.
-The correlation between rand_enc and time_spent is 0.130, indicating a weak positive correlation.
+* The correlation between rand_enc and used_ftr is 0.204, indicating a weak positive correlation.
+* The correlation between used_ftr and time_spent is 0.705, indicating a moderate to strong positive correlation.
+* The correlation between rand_enc and time_spent is 0.130, indicating a weak positive correlation.
 
->Assumptions for Instrumental Variable Estimation:
+> Overall Assessment:
 
-Instrumental variable (IV) estimation relies on several key assumptions:
-
-* Relevance: 
-
-  + The instrumental variable should be correlated with the endogenous variable (used_ftr) but not directly related to the outcome variable (time_spent).
-
-  + Based on the correlation matrix, it's important to check whether rand_enc is a relevant instrument. A correlation of 0.204 with used_ftr suggests some relevance.
-
-* Exogeneity: 
-
-  + The instrumental variable should be uncorrelated with the error term in the regression of the endogenous variable on the instruments.
-
-  + This assumption may not be directly observable from the correlation matrix. It requires further testing, such as examining residual plots.
-
-* No Measurement Error: 
-
-  + The instrumental variable should be measured precisely and not subject to measurement error.
-
-  + This assumption cannot be directly assessed from the correlation matrix and may require additional information about the measurement process.
- 
-* Independence: 
-
-  + The instrumental variable should be independent of unobserved factors that affect the outcome variable.
-
-  + This assumption is challenging to test directly. It requires careful consideration of potential confounding factors and unobserved variables.
-
->Overall Assessment:
-
-* The correlation between rand_enc and used_ftr suggests some relevance, but other assumptions require more detailed investigation.
-It's essential to conduct further diagnostic tests, such as examining residuals, testing for endogeneity, and considering the potential impact of unobserved variables.
-Consideration:
-
-* Instrumental variable estimation may be considered if the assumptions are met or found to be reasonable after thorough testing.
-However, the decision to use instrumental variables should be made cautiously, and the results should be interpreted with awareness of the assumptions and potential limitations.
+* The correlations between the randomly selected customer and other variables appear weak.
+* This indicates potential endogeneity issues.
+* Instrumental variable estimation can be employed to mitigate bias in such cases.
+* Unobserved factors may impact both the utilized features and the time spent.
+* Instrumental variable estimation becomes useful in addressing omitted variable bias under these circumstances.
+* This approach helps account for unobserved variables, enhancing the robustness of the analysis.
+* A valid instrumental variable for estimation should be relevant and exhibit no direct correlation with the outcome variable(time_spent), except through its association with the features.
 
 ### Task 4:
 
@@ -99,4 +72,9 @@ library(estimatr)
 model_iv <- iv_robust(time_spent ~ used_ftr | rand_enc, data = df_rand_enc)
 summary(model_iv)
 ```
-The initial estimate stands at 10.82, while the Instrumental Variable (IV) estimate is marginally lower at 9.73. The initial estimate, often referred to as the naive estimate, tends to be on the higher side as it overlooks concealed factors associated with both feature usage and time spent on the app, commonly referred to as encouragement. The IV estimate rectifies this by accounting for these hidden factors, resulting in a more precise and slightly lower estimate. Unlike the naive estimate, which encompasses both the impact of feature usage on app time and the influence of encouragement, the IV estimate isolates the effect of feature usage, leading to a more accurate depiction.
+* The initial estimate is 10.82, while the IV estimate is slightly lower at 9.73.
+* The initial estimate, often termed the naive estimate, tends to be higher.
+* The IV estimate (9.73) corrects for hidden factors associated with encouragement.
+* It provides a more precise estimate by accounting for these concealed factors, resulting in a slightly lower value.
+* Unlike the naive estimate, which includes both the impact of feature usage and the influence of encouragement, the IV estimate isolates the effect of feature usage.
+* This isolation leads to a more accurate depiction of the impact of feature usage on app time spent.
